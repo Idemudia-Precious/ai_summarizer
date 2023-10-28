@@ -9,6 +9,7 @@ const Demo = () => {
   const [article, setArticle] = useState({
     url: "",
     summary: "",
+    length: "",
   });
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
@@ -39,7 +40,10 @@ const Demo = () => {
 
     if (existingArticle) return setArticle(existingArticle);
 
-    const { data } = await getSummary({ articleUrl: article.url });
+    const { data } = await getSummary({
+      articleUrl: article.url,
+      articleLength: article.length,
+    });
     if (data?.summary) {
       const newArticle = { ...article, summary: data.summary };
       const updatedAllArticles = [newArticle, ...allArticles];
@@ -69,29 +73,53 @@ const Demo = () => {
       {/* Search */}
       <div className="flex flex-col w-full gap-2">
         <form
-          className="relative flex justify-center items-center"
+          className="relative flex-col space-y-3 flex justify-center items-center"
           onSubmit={handleSubmit}
         >
-          <img
-            src={linkIcon}
-            alt="link-icon"
-            className="absolute left-0 my-2 ml-3 w-5"
-          />
+          <div className="relative w-full flex justify-center items-center">
+            <img
+              src={linkIcon}
+              alt="link-icon"
+              className="absolute left-0 my-2 ml-3 w-5"
+            />
 
-          <input
-            type="url"
-            placeholder="Paste the article link"
-            value={article.url}
-            onChange={(e) => setArticle({ ...article, url: e.target.value })}
-            onKeyDown={handleKeyDown}
-            required
-            className="url_input peer" // When you need to style an element based on the state of a sibling element, mark the sibling with the peer class, and use peer-* modifiers to style the target element
-          />
+            <input
+              type="url"
+              placeholder="Paste the article link"
+              value={article.url}
+              onChange={(e) => setArticle({ ...article, url: e.target.value })}
+              onKeyDown={handleKeyDown}
+              required
+              className="url_input peer" // When you need to style an element based on the state of a sibling element, mark the sibling with the peer class, and use peer-* modifiers to style the target element
+            />
+          </div>
+          <div className="relative w-full flex justify-center items-center">
+            <img
+              src={linkIcon}
+              alt="link-icon"
+              className="absolute left-0 my-2 ml-3 w-5"
+            />
+
+            <select
+              className="url_input"
+              value={article.length}
+              onChange={(e) =>
+                setArticle({ ...article, length: e.target.value })
+              }
+              required
+            >
+              <option>How long would you like the summary to be?</option>
+              <option value="1">Short</option>
+              <option value="2">Moderate</option>
+              <option value="3">Long</option>
+              <option value="4">Very Long</option>
+            </select>
+          </div>
           <button
             type="submit"
-            className="submit_btn peer-focus:border-gray-700 peer-focus:text-gray-700 "
+            className="w-full orange_gradient2 submit_btn2 "
           >
-            <p>↵</p>
+            Summarize
           </button>
         </form>
 

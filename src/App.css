@@ -87,6 +87,10 @@
   @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
 
+.orange_gradient2 {
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500;
+}
+
 .desc {
   @apply mt-5 text-lg text-gray-600 sm:text-xl text-center max-w-2xl;
 }
@@ -97,6 +101,10 @@
 
 .submit_btn {
   @apply hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400;
+}
+
+.submit_btn2 {
+  @apply hover:px-11 right-0 py-2 px-10 flex w-20 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-white;
 }
 
 .link_card {
